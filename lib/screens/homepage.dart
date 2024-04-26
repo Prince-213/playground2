@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -114,10 +115,38 @@ class HomepageState extends ConsumerState<Homepage>
 
     return Scaffold(
         backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          toolbarHeight: 90,
-          backgroundColor: Colors.transparent,
-          title: const AdBanner(),
+          actions: [
+            Stack(
+              children: [
+                Transform.translate(
+                  offset: const Offset(10, -10),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 183, 67, 65)
+                            .withOpacity(.2),
+                        shape: BoxShape.circle),
+                  ),
+                )
+              ],
+            )
+          ],
+          backgroundColor: const Color(0xFFE65F5C),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10))),
+          title: const Text(
+            'Creator',
+            style: TextStyle(
+                fontFamily: 'Satoshi',
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.w600),
+          ),
         ),
         bottomSheet: BottomAppBar(
           height: count == 1 ? 160 : 90,

@@ -64,7 +64,7 @@ class AdBanner extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
           color: Colors.grey.withOpacity(.1),
-          borderRadius: BorderRadius.circular(25)),
+          borderRadius: BorderRadius.circular(12)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

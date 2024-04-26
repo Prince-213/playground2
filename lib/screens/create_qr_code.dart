@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quick_code/widgets/scan_screen_widgets.dart';
 
 class CreateQRCode extends StatefulWidget {
   const CreateQRCode({super.key});
@@ -13,7 +14,7 @@ class CreateQRCode extends StatefulWidget {
 class _CreateQRCodeState extends State<CreateQRCode> {
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> qr_code_options = [
+    final List<Map<String, dynamic>> qrCodeOptions = [
       {
         'title': 'Website',
         'descp': 'Creates website link',
@@ -34,156 +35,88 @@ class _CreateQRCodeState extends State<CreateQRCode> {
       }
     ];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Create QR Codes',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: 'Satoshi'),
-                    ),
-                    FilledButton(
-                      onPressed: () {},
-                      style: const ButtonStyle(
-                          padding: MaterialStatePropertyAll(EdgeInsets.all(0)),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.transparent)),
-                      child: const Text(
-                        'View All',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: 'Satoshi'),
-                      ),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SearchAnchor(builder:
-                      (BuildContext context, SearchController controller) {
-                    return SearchBar(
-                      controller: controller,
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                      elevation: const MaterialStatePropertyAll(0),
-                      backgroundColor:
-                          const MaterialStatePropertyAll(Colors.transparent),
-                      side: MaterialStatePropertyAll(BorderSide(
-                        width: 2,
-                        color: Colors.grey.withOpacity(.15),
-                      )),
-                      padding: const MaterialStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 16.0)),
-                      leading: const Icon(Icons.search),
-                      hintText: 'Search QR Code',
-                      /* trailing: <Widget>[
-                    Tooltip(
-                      message: 'Change brightness mode',
-                      child: IconButton(
-                        isSelected: false,
-                        onPressed: () {},
-                        icon: const Icon(Icons.wb_sunny_outlined),
-                        selectedIcon: const Icon(Icons.brightness_2_outlined),
-                      ),
-                    )
-                  ], */
-                    );
-                  }, suggestionsBuilder:
-                      (BuildContext context, SearchController controller) {
-                    return List<ListTile>.generate(5, (int index) {
-                      final String item = 'item $index';
-                      return ListTile(
-                        title: Text(item),
-                        onTap: () {
-                          setState(() {
-                            controller.closeView(item);
-                          });
-                        },
-                      );
-                    });
-                  }),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                        return ListTile(
-                          onTap: () {},
-                          splashColor: Colors.lightBlueAccent.withOpacity(.1),
-                          selected: true,
-                          title: const Text(
-                            'WebSite Link',
-                            style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w800),
-                          ),
-                          subtitle: const Text(
-                            'Creates website link',
-                            style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 16,
-                                color: Colors.grey),
-                          ),
-                          leading: Container(
-                            width: 50,
-                            height: 50,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.lightBlueAccent.withOpacity(.15),
-                            ),
-                            child: const Center(
-                                child: FaIcon(
-                              FontAwesomeIcons.globe,
-                              color: Colors.lightBlue,
-                            )),
-                          ),
-                          trailing: Checkbox.adaptive(
-                            value: false,
-                            onChanged: (value) {},
-                            fillColor: const MaterialStatePropertyAll(
-                                Colors.transparent),
-                            activeColor: Colors.lightGreenAccent,
-                          ),
-                        );
-                      }, childCount: 10))
-                    ],
-                  ),
-                )
-              ],
+    final double width = MediaQuery.of(context).size.width;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(
-                  height: 100,
-                  color: Colors.red,
-                  width: double.infinity,
-                ),
-              ))
-        ],
+            const AdBanner(),
+            SizedBox(
+              width: double.infinity,
+              height: double.maxFinite,
+              child: ListView.separated(
+                  itemCount: qrCodeOptions.length,
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 40, top: 20),
+                      child: Container(
+                        width: 2,
+                        height: 2,
+                        color: Colors.grey.withOpacity(.2),
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: 300,
+                      child: ListTile(
+                        onTap: () {},
+                        isThreeLine: false,
+                        contentPadding: EdgeInsets.only(left: 10),
+                        splashColor:
+                            qrCodeOptions[index]['color'].withOpacity(.1),
+                        selected: true,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        title: Text(
+                          qrCodeOptions[index]['title'],
+                          style: const TextStyle(
+                              fontFamily: 'Satoshi',
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800),
+                        ),
+                        subtitle: Text(
+                          qrCodeOptions[index]['descp'],
+                          style: const TextStyle(
+                              fontFamily: 'Satoshi',
+                              fontSize: 12,
+                              color: Colors.grey),
+                        ),
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color:
+                                qrCodeOptions[index]['color'].withOpacity(.15),
+                          ),
+                          child: Center(
+                              child: FaIcon(
+                            qrCodeOptions[index]['icon'],
+                            color: qrCodeOptions[index]['color'],
+                            size: 16,
+                          )),
+                        ),
+                        trailing: Checkbox.adaptive(
+                          value: false,
+                          onChanged: (value) {},
+                          fillColor: const MaterialStatePropertyAll(
+                              Colors.transparent),
+                          activeColor: Colors.lightGreenAccent,
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
