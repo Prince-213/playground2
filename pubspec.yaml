@@ -41,7 +41,7 @@ dependencies:
   tab_container: ^3.5.2
   flashy_tab_bar2: ^0.0.10
   dynamic_tabbar: ^1.0.6
-  lottie: ^3.1.0
+
   pretty_qr_code: ^3.3.0
   riverpod_annotation: ^2.3.5
   freezed_annotation:
@@ -51,6 +51,12 @@ dependencies:
   animated_icon: ^0.0.9
   font_awesome_flutter: ^10.7.0
   rive: ^0.13.2
+  eva_icons_flutter: ^3.1.0
+  icons_plus: ^5.0.0
+  slide_action: ^0.0.2
+  action_slider: ^0.7.0
+  lottie: ^3.1.0
+  avatar_stack: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -82,11 +88,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/lottie/code.json
-    - assets/images/3376820.jpg
-    - assets/images/bloom-man-shopping-online-by-phone.png
-    - assets/lottie/qr_code_scanner.riv
-    - assets/images/icons8-qr-code-64.png
+    - assets/images/highhouse.png
+    - assets/images/pattern.png
+    - assets/images/icons8-four-squares-96.png
+    - assets/images/icons8-calendar-96.png
+    - assets/images/icons8-cog-96.png
+    - assets/images/icons8-coin-96.png
+    - assets/images/map.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -103,14 +111,41 @@ flutter:
     - family: Corsa Grotesk
       fonts:
         - asset: assets/fonts/Corsa Grotesk Regular.otf
+
         - asset: assets/fonts/Corsa Grotesk Thin.otf
+          weight: 100
     #         style: italic
     - family: Cabinet Grotesk
       fonts:
-        - asset: assets/fonts/CabinetGrotesk_Complete/CabinetGrotesk_Complete/Fonts/Variable/CabinetGrotesk-Variable.ttf
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Black.otf
+          weight: 300
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Bold.otf
+          weight: 800
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Extrabold.otf
+          weight: 900
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Extralight.otf
+          weight: 100
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Light.otf
+          weight: 200
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Medium.otf
+          weight: 400
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Regular.otf
+        - asset: assets\fonts\CabinetGrotesk_Complete\CabinetGrotesk_Complete\Fonts\OTF\CabinetGrotesk-Thin.otf
+          weight: 400
     - family: Clash Grotesk
       fonts:
-        - asset: assets/fonts/ClashGrotesk_Complete/ClashGrotesk_Complete/Fonts/Variable/ClashGrotesk-Variable.ttf
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Bold.otf
+          weight: 800
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Extralight.otf
+          weight: 100
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Light.otf
+          weight: 200
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Medium.otf
+          weight: 300
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Regular.otf
+          weight: 400
+        - asset: assets\fonts\ClashGrotesk_Complete\ClashGrotesk_Complete\Fonts\OTF\ClashGrotesk-Semibold.otf
+          weight: 500
 
     - family: Mosk
       fonts:
