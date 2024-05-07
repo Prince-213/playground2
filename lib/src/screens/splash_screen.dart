@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:action_slider/action_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -15,149 +16,52 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Scaffold(
-        backgroundColor: black,
+        backgroundColor: blueBlack,
         resizeToAvoidBottomInset: false,
         extendBody: true,
         extendBodyBehindAppBar: true,
-        bottomNavigationBar:
-            const SafeArea(child: SafeArea(child: BottomBar())),
+
         body: Padding(
-          padding: EdgeInsets.only(top: 60),
-          child: Stack(
-            children: [
-              Positioned(
-                  top: 0,
-                  left: context.percentWidth * 15,
-                  child: Container(
-                    width: context.percentWidth * 80,
-                    height: 440,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/highhouse.png'),
-                            fit: BoxFit.cover)),
-                  ))
-            ],
-          ),
+          padding: EdgeInsets.only(top: 60, left: 30, right: 30),
+          child: VStack([
+            VStack([
+              HStack([
+                Text('Privacy').text.size(36).color(Vx.teal100).bold.make(),
+                SizedBox(width: 10,),
+                Text('Sharing').text.size(36).color(Vx.white).make(),
+
+              ]),
+
+
+              Text('Guarantee').text.size(36).color(Vx.white).make(),
+            ]),
+            SizedBox(height: 10,),
+            Text("Tasks can be proritized and set with deadlines, so all team members have visibility into the project's progress.").text.size(16).color(Vx.gray400).make(),
+            SizedBox(height: 80,),
+            ActionSlider.standard(
+              child: Text('Get Started').text.lg.bold.make().pLTRB(10, 0, 0, 0),
+              sliderBehavior: SliderBehavior.stretch,
+              width: context.percentWidth * 60,
+              backgroundColor: beige,
+              toggleColor: blueBlack,
+              icon: Icon(Icons.arrow_right_alt_outlined, color: Colors.white,),
+              action: (controller) async {
+                controller.loading(); //starts loading animation
+                await Future.delayed(const Duration(seconds: 3));
+                controller.success(); //starts success animation
+                await Future.delayed(const Duration(seconds: 1));
+                context.go('/home-screen');
+                controller.reset(); //resets the slider
+              },
+              successIcon: Icon(EvaIcons.checkmark_outline, color: Vx.emerald300,),
+              loadingIcon: Icon(EvaIcons.loader_outline, color: Colors.white,),
+
+            )
+
+          ], alignment: MainAxisAlignment.end,).box.height(context.percentHeight * 90).make(),
         ),
       ),
     );
   }
 }
 
-class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return VStack([
-      ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: VxBox(
-              child: VStack(
-            [
-              const Text('TaskCraft')
-                  .text
-                  .semiBold
-                  .xl5
-                  .color(Vx.white)
-                  .make()
-                  .objectCenter(),
-              const Text('ModernTask Tracker', style: TextStyle(fontFamily: 'Satoshi'))
-                  .text
-                  .medium
-                  
-                  .lg
-                  .color(Vx.white.withOpacity(.4))
-                  .make()
-                  .objectCenter(),
-            ],
-            alignment: MainAxisAlignment.center,
-          )).roundedLg.height(140).color(matBlack.withOpacity(.8)).make(),
-        ),
-      ),
-      VxCapsule(
-        backgroundColor: matBlack,
-        height: 65,
-        child: HStack(
-          [
-            InkWell(
-              child: VxCapsule(
-                backgroundColor: black,
-                width: 80,
-                child: Icon(
-                  EvaIcons.arrowhead_right,
-                  color: Vx.white,
-                  size: 24,
-                ),
-              ).p4(),
-            ),
-            const Text('Swipe to Skip')
-                .text
-                .semiBold
-                .color(Vx.white.withOpacity(.5))
-                .make()
-                .objectCenter(),
-            InkWell(
-              onTap: () { context.go('/home-screen'); },
-              child: VxCapsule(
-                backgroundColor: black,
-                width: 80,
-                child: Icon(
-                  EvaIcons.corner_up_right,
-                  color: Vx.white,
-                  size: 24,
-                ),
-              ).p4(),
-            ),
-          ],
-          alignment: MainAxisAlignment.spaceBetween,
-        ),
-      ).py(2),
-      VxBox(
-              child: VStack([
-        InkWell(
-          onTap: () {},
-          child: VxCapsule(
-            height: 60,
-            backgroundColor: black,
-            child: const Text('Create an account')
-                .text
-                .semiBold
-                .color(Vx.blue400)
-                .make()
-                .objectCenter(),
-          ),
-        ),
-        const SizedBox(
-          height: 4,
-        ),
-        InkWell(
-          onTap: () {},
-          child: VxCapsule(
-            height: 60,
-            backgroundColor: matGrey,
-            child: const Text('Login')
-                .text
-                .color(Vx.white)
-                .semiBold
-                .make()
-                .objectCenter(),
-          ),
-        ),
-        Spacer(),
-        const Text('Sponsored by EmrancisGroup')
-            .text
-            .color(Vx.white.withOpacity(.2))
-            .semiBold
-            .make()
-            .objectCenter()
-      ]))
-          .color(matBlack)
-          .height(context.percentHeight * 28)
-          .p24
-          .roundedLg
-          .make()
-    ]).box.make().p8();
-  }
-}
